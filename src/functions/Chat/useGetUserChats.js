@@ -3,12 +3,9 @@ import {useEffect, useState} from "react";
 import {realtimeDB} from "../../database/database";
 
 //for get data from realtime database
-export const useGetChat = (nowUser,companion) =>{
+export const useGetUserChats = (userUid) =>{
 
     const [data,setData] = useState([]);
-
-    const idDef = nowUser + "-" + companion;
-    const idRev = companion + "-" + nowUser;
 
     useEffect(() =>{
         onValue(ref(realtimeDB,"/chats"),snapshot => {
@@ -17,8 +14,8 @@ export const useGetChat = (nowUser,companion) =>{
             if (dataInner){
                 //eslint-disable-next-line
                 Object.entries(dataInner,[]).map(elem => {
-                    if (elem[0] === idRev || elem[0] === idDef){
-                        setData(old => [...old,...Object.values(elem[1])])
+                    if (elem[0].includes(userUid)){
+                        setData(old => [...old,Object.values(elem[1])])
                     }
                 })
             }else {
@@ -26,7 +23,7 @@ export const useGetChat = (nowUser,companion) =>{
             }
         })
         // eslint-disable-next-line
-    },[nowUser,companion])
+    },[userUid])
 
     return data;
 }

@@ -9,6 +9,7 @@ import Login from "./general-components/AuthComponents/LoginComponents/Login";
 import PhoneLogin from "./general-components/AuthComponents/LoginComponents/PhoneLogin";
 import NavbarTop from "./general-components/NavbarTop/NavbarTop";
 import ChatPage from "./pages/ChatPage";
+import MyChatsPage from "./pages/MyChatsPage";
 
 const Router = () => {
 
@@ -35,6 +36,9 @@ const Router = () => {
 
                     {/*chat page*/}
                     <Route path="/chat/:userUid" element={<ChatPage />} />
+
+                    {/*users Chat Page*/}
+                    <Route path="/myChats" element={<MyChatsPage />} />
                 </Routes>
             </Container>
         </UserAuthContextProvider>

@@ -20,7 +20,7 @@ export const useGetUser = (userUid) =>{
             }
         })
         // eslint-disable-next-line
-    },[url])
+    },[userUid])
 
     return data
 }

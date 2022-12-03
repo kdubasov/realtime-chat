@@ -7,8 +7,9 @@ const CheckUserAlert = () => {
 
     const { user } = useUserAuth();
     const userDbData = useGetUser(user?.uid);
+    // console.log(userDbData);
 
-    if(Boolean(Object.values(userDbData).length)){
+    if(user && Object.values(userDbData).length){
         return(
             <Alert variant={"success"} className={"p-2 mt-2 small text-center"}>
                 Вы заполнили свои данные, теперь можете общаться.
