@@ -17,7 +17,14 @@ const NavbarTop = () => {
                 </Link>
 
                 <Nav className="me-auto">
-                    {user && <Link className={"text-white"} to={"/userProfile"}>Личный кабинет</Link>}
+                    {
+                        user &&
+                        <>
+                            <Link className={"mx-2 text-white small"} to={"/myChats"}>Мои чаты</Link>
+                            <Link className={"mx-2 text-white small"} to={"/userProfile"}>Личный кабинет</Link>
+                        </>
+                    }
+
                     {!user && <Link className={"text-white"} to={"/login"}>Войти в аккаунт</Link>}
                 </Nav>
             </Container>

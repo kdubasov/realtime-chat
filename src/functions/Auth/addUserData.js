@@ -17,6 +17,6 @@ export const addUserData = (user,data) => {
         uid: user.uid,
         name: data.name,
         surname: data.surname,
-        date: Date.now(),
+        dateRegistration: Date.now(),
     })
 }

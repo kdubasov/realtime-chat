@@ -6,6 +6,7 @@ import UserData from "./UserData";
 import AddUserData from "./AddUserData";
 import {useGetUser} from "../../../functions/Auth/useGetUser";
 import UserDataDB from "./UserDataDB";
+import CheckUserAlert from "../../Alerts/CheckUserAlert";
 
 
 const UserProfile = () => {
@@ -24,11 +25,13 @@ const UserProfile = () => {
 
   //user data from database
   const userDbData = useGetUser(user.uid);
-  console.log(userDbData)
+  // console.log(userDbData);
 
   if(user){
     return (
         <Container className={'UserProfile'}>
+
+          <CheckUserAlert />
 
           <h4 className={"my-4 fw-bolder"}>
             Личный кабинет
@@ -36,6 +39,7 @@ const UserProfile = () => {
 
 
           <UserData user={user} handleLogout={handleLogout} />
+
           {
             !Object.values(userDbData).length ?
                 <AddUserData user={user} />:

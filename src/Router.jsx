@@ -8,6 +8,7 @@ import ProtectedAuthRoute from "./general-components/AuthComponents/ProtectedAut
 import Login from "./general-components/AuthComponents/LoginComponents/Login";
 import PhoneLogin from "./general-components/AuthComponents/LoginComponents/PhoneLogin";
 import NavbarTop from "./general-components/NavbarTop/NavbarTop";
+import ChatPage from "./pages/ChatPage";
 
 const Router = () => {
 
@@ -31,6 +32,9 @@ const Router = () => {
                     />
                     <Route path="/login" element={<Login />} />
                     <Route path="/phoneLogin" element={<PhoneLogin />} />
+
+                    {/*chat page*/}
+                    <Route path="/chat/:userUid" element={<ChatPage />} />
                 </Routes>
             </Container>
         </UserAuthContextProvider>
