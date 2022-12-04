@@ -5,14 +5,23 @@ import {useGetUserPhoto} from "../../functions/Auth/useGetUserPhoto";
 import {getDate} from "../../functions/getDate";
 import {Link} from "react-router-dom";
 
-const ListMyChatsItem = ({chat}) => {
+const ListMyChatsItem = ({chat,user}) => {
 
     //ищем послднее собещние чтобы показать его
     const lastMessage = (chat.sort((a,b) => b.date - a.date))[0];
 
+    //ищем компаньена
+    const getCompanionUid = () => {
+        if(lastMessage.from === user.uid){
+            return lastMessage.to;
+        }else {
+            return lastMessage.from;
+        }
+    }
+
     //с кем чат
-    const companion = useGetUser(lastMessage.to);
-    const companionPhoto = useGetUserPhoto(lastMessage.to);
+    const companion = useGetUser(getCompanionUid());
+    const companionPhoto = useGetUserPhoto(getCompanionUid());
 
     if(Object.values(companion).length && Object.values(companionPhoto).length){
         return (
@@ -30,7 +39,12 @@ const ListMyChatsItem = ({chat}) => {
                             <i className="small">{getDate(lastMessage.date)}</i>
                         </p>
                     </header>
-                    <p className={"m-0"}>{lastMessage.message}</p>
+                    <p className={"m-0"}>
+                        <small className={"opacity-50"}>
+                            {lastMessage.from === user.uid && "Вы: "}
+                        </small>
+                        {lastMessage.message}
+                    </p>
                     <Link to={`/chat/${companion.uid}`}>Перейти к чату</Link>
                 </div>
             </ListGroupItem>

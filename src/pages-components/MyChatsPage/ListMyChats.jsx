@@ -10,14 +10,13 @@ const ListMyChats = () => {
 
     // all chats for user
     const chats = useGetUserChats(user?.uid);
-    // console.log(chats,'ListMyChats');
 
-    if (chats.length){
+    if (user && chats.length){
         return (
             <ListGroup className={"ListMyChats"}>
                 {
                     chats.map((chat,ids) => (
-                        <ListMyChatsItem key={ids} chat={chat} />
+                        <ListMyChatsItem key={ids} chat={chat} user={user} />
                     ))
                 }
             </ListGroup>
