@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react';
 import {Button, Alert, Card, FormControl, ListGroup, ListGroupItem} from "react-bootstrap";
 import {getGraphDate} from "../../functions/getDate";
+import {IMessage, IUserConnect} from "./IChat";
 
 
 const Chat:React.FC = () => {
@@ -21,7 +22,7 @@ const Chat:React.FC = () => {
         socket.current.onopen = () => {
             setConnected(true)
 
-            const message = {
+            const message:IUserConnect = {
                 event: "connection",
                 userName,
                 id: Date.now(),
@@ -56,7 +57,7 @@ const Chat:React.FC = () => {
         if (!value){
             alert("Enter message");
         }
-        const message = {
+        const message:IMessage = {
             event: "message",
             userName,
             id: Date.now(),
@@ -97,11 +98,11 @@ const Chat:React.FC = () => {
                         <ListGroupItem key={elem.id}>
                             {
                                 elem.event === "connection" ?
-                                    <Alert variant={"success"} className={"small p-2"}>
+                                    <Alert variant={"success"} className={"small m-0 p-2"}>
                                         Пользователь {elem.userName} подключился. <br/>
                                         <i className="small">{elem.date}</i>
                                     </Alert>:
-                                    <Alert className={"small p-2"}>
+                                    <Alert className={"small m-0 p-2"}>
                                         {elem.userName} <br/>
                                         <i className="small">{elem.message}</i>
                                     </Alert>
